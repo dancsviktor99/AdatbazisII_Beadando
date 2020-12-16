@@ -75,21 +75,29 @@ namespace DBBeadando.Models.Records
             }
         }
 
-        private int asztal_datuma;
+        private DateTime asztal_datuma;
 
-        public int Asztal_datuma
+        public DateTime Asztal_datuma
         {
             get { return asztal_datuma; }
             set { asztal_datuma = value; }
         }
 
         private string jatektipusa;
-                    
+
         public string Jatektipusa
         {
             get { return jatektipusa; }
-            set { jatektipusa = value; }
+            set 
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("A jaték típusa nem lehet üres!");
+                }
+                jatektipusa = value; 
+            }
         }
+
 
 
 
