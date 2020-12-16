@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBBeadando.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace DBBeadando.Models.Records
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("Az asztalkód nem lehet nulla!");
+                    throw new NullException("Az asztalkód nem lehet nulla!");
                 }
                 asztalkod = value; 
             }
@@ -39,22 +40,26 @@ namespace DBBeadando.Models.Records
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("A gyártó nem lehet nulla!");
+                    throw new NullException("A gyártó nem lehet nulla!");
                 }
                 gyarto = value; 
             }
         }
 
-        private int asztallimit;
+        private string asztallimit;
 
-        public int Asztallimit
+        public string Asztallimit
         {
             get { return asztallimit; }
             set 
             {
-                if (value <=  0 || value > 100000)
+                if (value == null)
                 {
-                    throw new ArgumentException("Nem lehet nulla és negatív, továbbá 100.000 felett!");
+                    throw new NullException("A limit  nem lehet nulla");
+                }
+                if (value.Length > 100000)
+                {
+                    throw new OutOfRangeException("A Limit felső értéke 100000!")
                 }
                 asztallimit = value; 
             }
@@ -69,7 +74,7 @@ namespace DBBeadando.Models.Records
             {
                 if (value == null)
                 {
-                    throw new ArgumentException("A Krupie neve nem lehet üres!");
+                    throw new NullException("A Krupie neve nem lehet üres!");
                 }
                 krupie = value; 
             }
@@ -92,7 +97,7 @@ namespace DBBeadando.Models.Records
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("A jaték típusa nem lehet üres!");
+                    throw new NullException("A jaték típusa nem lehet üres!");
                 }
                 jatektipusa = value; 
             }
